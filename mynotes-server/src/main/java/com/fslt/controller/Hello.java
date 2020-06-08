@@ -1,5 +1,6 @@
 package com.fslt.controller;
 
+import com.fslt.result.Result;
 import com.fslt.vo.People;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class Hello {
     public Object getPeople(Integer num) {
         System.out.println(num);
         People people = new People("林宗雄", 22);
-        return people;
+        return Result.getSuccessResult(people);
     }
 
 }
