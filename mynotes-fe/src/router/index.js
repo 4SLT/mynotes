@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/pages/index'
 import _404 from '@/pages/404'
-import SideBar from '@/components/sideBar'
-import FileList from '@/components/fileList'
-import File from '@/components/file'
-import TopBar from '@/components/topBar'
+
+import LatestFile from '@/components/latestFile'
+import StarFile from '@/components/starFile'
+import ColourFile from '@/components/colourFile'
 
 Vue.use(Router)
 
@@ -15,28 +15,33 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index,
-      components: {
-        default: Index,
-        'SideBar': SideBar,
-        'FileList': FileList,
-        'File': File
-      }
+      children: [
+        {
+          path: '/latestFile',
+          name: 'latestFile',
+          component: LatestFile
+        }, {
+          path: '/starFile',
+          name: 'starFile',
+          component: StarFile
+        }, {
+          path: '/colourFile',
+          name: 'colourFile',
+          component: ColourFile
+        }
+      ]
+    },{
+      path: '/latestFile',
+      name: 'latestFile',
+      component: LatestFile
     }, {
-      path: '/sideBar',
-      name: 'SideBar',
-      component: SideBar
+      path: '/starFile',
+      name: 'starFile',
+      component: StarFile
     }, {
-      path: '/fileList',
-      name: 'FileList',
-      component: FileList
-    }, {
-      path: '/file',
-      name: 'File',
-      component: File
-    }, {
-      path: '/topBar',
-      name: 'TopBar',
-      component: TopBar
+      path: '/colourFile',
+      name: 'colourFile',
+      component: ColourFile
     },
     {
       path: '/404',

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>文件列表</h1>
+    加星文档
   </div>
 </template>
 
 <script>
-  export default {
-    name: "fileList"
-  }
+    export default {
+        name: "starFile"
+    }
 </script>
 
 <style scoped>

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>顶部状态栏</h1>
+    颜色文档
   </div>
 </template>
 
 <script>
-  export default {
-    name: "topBar"
-  }
+    export default {
+        name: "colourFile"
+    }
 </script>
 
 <style scoped>
