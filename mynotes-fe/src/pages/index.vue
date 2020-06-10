@@ -157,7 +157,12 @@
     /*line-height: 160px;*/
   }
 
+  .border-line-left {
+    border-left: 1px solid #D3DCE6;
+  }
+
   .border-line-top {
     border-top: 1px solid #D3DCE6;
   }
+
 </style>

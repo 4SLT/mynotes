@@ -6,4 +6,6 @@ export const test = {
   getHello: body => get('/hello', body),
   // postList:body=>post('/user/getList', body),
   requestGetPeople: body => request('/getPeople', body, 'get'),
+  requestSearchTest: body => request('/searchTest', body, 'get'),
+
 }
