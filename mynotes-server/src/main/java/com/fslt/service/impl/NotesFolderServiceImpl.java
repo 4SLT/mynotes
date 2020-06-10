@@ -3,7 +3,6 @@ package com.fslt.service.impl;
 import com.fslt.dao.NotesFolderDao;
 import com.fslt.entity.pojo.Folder;
 import com.fslt.service.NotesFolderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

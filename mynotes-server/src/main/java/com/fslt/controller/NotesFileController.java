@@ -1,8 +1,8 @@
 package com.fslt.controller;
 
-import com.fslt.entity.pojo.Folder;
+import com.fslt.entity.pojo.File;
 import com.fslt.result.Result;
-import com.fslt.service.NotesFolderService;
+import com.fslt.service.NotesFileService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,23 +10,22 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @description: NotesFolderController
- * @date: 2020/6/10 14:17
+ * @description: NotesFileController
+ * @date: 2020/6/10 15:14
  * @author: 林宗雄
  * @version: 1.0
  */
 @RestController
-@RequestMapping(value = "/notesFolder")
-public class NotesFolderController {
+@RequestMapping(value = "/notesFile")
+public class NotesFileController {
 
     @Resource
-    private NotesFolderService notesFolderService;
+    private NotesFileService notesFileService;
 
-    @RequestMapping("/getFolderList")
+    @RequestMapping("/getFileList")
     public Object getFolderList() {
-        List<Folder> result = notesFolderService.getFolderList();
+        List<File> result = notesFileService.getLatestFileList();
         return Result.getSuccessResult(result);
     }
-
 
 }

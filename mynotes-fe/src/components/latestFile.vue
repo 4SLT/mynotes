@@ -26,7 +26,7 @@
             :show-header=false
             style="width: 100%">
             <el-table-column
-              prop="fileName">
+              prop="title">
             </el-table-column>
           </el-table>
         </div>
@@ -51,6 +51,9 @@
 <script>
 
   import {test} from '@/request/api'
+  import {folder} from '@/request/api'
+  import {file} from '@/request/api'
+
 
   export default {
     name: "latestFile",
@@ -58,7 +61,7 @@
       return {
         searchInput: '',
         tableData: [
-          {fileName: 'mock文件'}
+          {title: 'mock文件'}
         ]
       }
     },
@@ -66,7 +69,7 @@
 
       search() {
         let searchInput = this.searchInput
-        test.requestSearchTest({searchInput}).then(res => {
+        file.getFolderList().then(res => {
           console.log(res.re)
           this.tableData = res.re
         })

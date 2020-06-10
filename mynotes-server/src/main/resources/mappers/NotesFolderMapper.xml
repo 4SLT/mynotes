@@ -18,12 +18,12 @@
     <select id="getFolderList"
             resultType="com.fslt.entity.pojo.Folder">
         SELECT
-        *
-<!--        <include refid="allFolder">-->
-<!--            <property name="table" value="nf"/>-->
-<!--        </include>-->
+        <include refid="allFolder">
+            <property name="table" value="nf"/>
+        </include>
         FROM
         t_notes_folder nf
+
     </select>
 
 

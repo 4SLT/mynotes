@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.fslt.dao.NotesFileDao">
+
+    <sql id="allFile">
+        ${table}.id AS id
+        ,${table}.folder_id AS folderId
+        ,${table}.unique_code AS uniqueCode
+        ,${table}.title AS title
+        ,${table}.content AS content
+        ,${table}.user_code AS userCode
+        ,${table}.user_id AS userId
+        ,${table}.create_time AS createTime
+        ,${table}.modify_time AS modifyTime
+        ,${table}.delete_flag AS deleteFlag
+        ,${table}.status AS status
+    </sql>
+
+    <select id="getLatestFileList"
+            resultType="com.fslt.entity.pojo.File">
+        SELECT
+        <include refid="allFile">
+            <property name="table" value="nfi"/>
+        </include>
+        FROM
+            t_notes_file nfi
+        WHERE
+            nfi.delete_flag = 0
+            AND nfi.STATUS = 1
+        ORDER BY
+            nfi.modify_time DESC
+    </select>
+
+</mapper>
