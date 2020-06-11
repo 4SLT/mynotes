@@ -29,4 +29,12 @@ public interface NotesFileDao {
      */
     FileInfoVO getNoteInfoById(@Param("id") Long id);
 
+    /**
+     * 根据file_id获取文件内容（包括内容content）
+     *
+     * @param id
+     * @return
+     */
+    FileInfoVO getFileContentByFileId(@Param("id") Long id);
+
 }

@@ -21,4 +21,9 @@ public class FileInfoVO extends File {
      */
     private String folderName;
 
+    /**
+     * 笔记内容
+     */
+    private String content;
+
 }

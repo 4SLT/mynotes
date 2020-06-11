@@ -23,9 +23,15 @@ public class NotesContentController {
     private NotesContentService notesContentService;
 
     @RequestMapping("/getContentList")
-    public Object getContentList(){
+    public Object getContentList() {
         List<Content> list = notesContentService.getContentList();
         return Result.getSuccessResult(list);
+    }
+
+    @RequestMapping("/getContentById")
+    public Object getContentById(Long id) {
+        Content content = notesContentService.getContentById(id);
+        return Result.getSuccessResult(content);
     }
 
 }

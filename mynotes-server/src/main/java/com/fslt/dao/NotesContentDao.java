@@ -1,6 +1,7 @@
 package com.fslt.dao;
 
 import com.fslt.entity.pojo.Content;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,5 +19,14 @@ public interface NotesContentDao {
      * @return
      */
     List<Content> getContentList();
+
+
+    /**
+     * 根据id获取笔记内容
+     *
+     * @param id
+     * @return
+     */
+    Content getContentById(@Param("id") Long id);
 
 }

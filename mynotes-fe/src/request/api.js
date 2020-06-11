@@ -12,9 +12,11 @@ export const folder = {
 export const file = {
   getFolderList: body => request('/notesFile/getFileList', body, 'get'),
   getNoteInfoById: body => request('/notesFile/getNoteInfoById', body, 'get'),
+  getFileContentByFileId: body => request('/notesFile/getFileContentByFileId', body, 'get'),
 }
 
 // 笔记内容
 export const content = {
   getContentList: body => request('/notesContent/getContentList', body, 'get'),
+  getContentById: body => request('/notesContent/getContentById', body, 'get'),
 }

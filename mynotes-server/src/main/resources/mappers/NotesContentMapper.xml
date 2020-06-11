@@ -25,5 +25,18 @@
         AND nc.STATUS = 1
     </select>
 
+    <select id="getContentById"
+            resultType="com.fslt.entity.pojo.Content">
+        SELECT
+        <include refid="allContent">
+            <property name="table" value="nc"/>
+        </include>
+        FROM
+        t_notes_content nc
+        WHERE
+        nc.delete_flag = 0
+        AND nc.STATUS = 1
+        AND nc.id = #{id,jdbcType = BIGINT}
+    </select>
 
 </mapper>

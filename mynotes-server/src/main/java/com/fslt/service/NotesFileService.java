@@ -28,4 +28,11 @@ public interface NotesFileService {
      */
     FileInfoVO getNoteInfoById(Long id);
 
+    /**
+     * 根据file_id获取文件内容（包括内容content）
+     *
+     * @param id
+     * @return
+     */
+    FileInfoVO getFileContentByFileId(Long id);
 }

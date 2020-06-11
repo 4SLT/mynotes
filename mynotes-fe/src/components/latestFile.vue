@@ -40,20 +40,14 @@
           <el-row>
             <el-col :span="10">
               <div class="vertical-center text-left" style="padding-left: 20px;">
-                {{noteTitle}}
+                {{this.file.title}}
               </div>
             </el-col>
 
             <el-col :span="14">
               <div class="vertical-center text-right" style="padding-right: 20px;">
-                <!--                <el-color-picker-->
-                <!--                  v-model="color"-->
-                <!--                  size="mini"-->
-                <!--                  show-alpha="false"-->
-                <!--                  :predefine="predefineColors"-->
-                <!--                >-->
-                <!--                </el-color-picker>-->
                 <el-button type="primary" size="small" @click="saveNote">保存</el-button>
+                <el-button type="primary" size="small" @click="getFileContentById">测试接口</el-button>
                 <el-button plain size="small" icon="el-icon-star-on"></el-button>
                 <el-button plain size="small" icon="el-icon-delete"></el-button>
                 <!--                <el-button plain size="small" icon="el-icon-more"></el-button>-->
@@ -64,7 +58,7 @@
         </div>
         <!--文件内容-->
         <div class="border-line-top">
-          文件区
+          {{this.file.content}}
         </div>
       </el-main>
 
@@ -75,9 +69,9 @@
 
 <script>
 
-  import {test} from '@/request/api'
   import {folder} from '@/request/api'
   import {file} from '@/request/api'
+  import {content} from '@/request/api'
 
 
   export default {
@@ -86,29 +80,32 @@
       return {
         searchInput: '',
         id: 1,
-        // color: '#409EFF',
-        // predefineColors: [
-        //   '#ff4500',
-        //   '#ff8c00',
-        //   '#ffd700',
-        //   '#90ee90',
-        //   '#00ced1',
-        //   '#1e90ff'
-        // ],
-        noteTitle: '标题标题标题标题标题标题标题标题',
+        file: {
+          id: 0,
+          title: 'file的title',
+          contentId: '',
+          content: 'file的content'
+        },
         tableData: [
-          {title: 'mock文件'}
+          {title: 'mock文件', id: 1, contentId: 1}
         ]
       }
     },
     methods: {
 
       search() {
-        let searchInput = this.searchInput
         file.getFolderList().then(res => {
-          console.log(res.re)
           this.tableData = res.re
-          this.setNoteTitle()
+          this.setFirstNoteInfo()
+        })
+      },
+
+      //根据文件id查询文件的内容
+      getFileContentById() {
+        let id = 1
+        file.getFileContentByFileId({id}).then(res => {
+          this.file = res.re
+          console.log(this.file)
         })
       },
 
@@ -123,13 +120,23 @@
         })
       },
 
-      // 文件标题设为查到的文件列表的第一个文件标题
-      setNoteTitle() {
+      //将文件的标题内容设为查询到的文件列表的第一个文件
+      setFirstNoteInfo() {
         if (this.tableData.length > 0) {
-          this.noteTitle = this.tableData[0].title
+          let id = this.tableData[0].contentId
+          content.getContentById({id}).then(res => {
+            this.file = this.tableData[0]
+            this.file.content = res.re.content
+          })
         }
-      },
+      }
 
+    },
+    created() {
+      file.getFolderList().then(res => {
+        this.tableData = res.re
+        this.setFirstNoteInfo()
+      })
     }
 
   }

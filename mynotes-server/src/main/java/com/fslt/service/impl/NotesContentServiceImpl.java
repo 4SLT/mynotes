@@ -25,4 +25,9 @@ public class NotesContentServiceImpl implements NotesContentService {
         return notesContentDao.getContentList();
     }
 
+    @Override
+    public Content getContentById(Long id) {
+        return notesContentDao.getContentById(id);
+    }
+
 }

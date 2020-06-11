@@ -47,4 +47,19 @@
             nfi.id = #{id,jdbcType = BIGINT}
     </select>
 
+    <select id="getFileContentByFileId"
+            resultType="com.fslt.entity.vo.FileInfoVO">
+        SELECT
+            nfi.id AS id,
+            nfi.title AS title,
+            nfi.content_id AS contentId,
+            nc.content AS content
+        FROM
+            t_notes_file nfi
+            LEFT JOIN t_notes_content nc ON nc.id = nfi.content_id
+        WHERE
+            nfi.delete_flag = 0
+            AND nfi.STATUS = 1
+            AND nfi.id = #{id,jdbcType = BIGINT}
+    </select>
 </mapper>

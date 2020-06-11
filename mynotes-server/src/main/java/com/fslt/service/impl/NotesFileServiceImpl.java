@@ -31,4 +31,9 @@ public class NotesFileServiceImpl implements NotesFileService {
         return notesFileDao.getNoteInfoById(id);
     }
 
+    @Override
+    public FileInfoVO getFileContentByFileId(Long id) {
+        return notesFileDao.getFileContentByFileId(id);
+    }
+
 }

@@ -19,4 +19,11 @@ public interface NotesContentService {
      */
     List<Content> getContentList();
 
+    /**
+     * 根据id获取笔记内容
+     *
+     * @param id
+     * @return
+     */
+    Content getContentById(Long id);
 }

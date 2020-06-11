@@ -24,7 +24,7 @@ public class NotesFileController {
     private NotesFileService notesFileService;
 
     @RequestMapping("/getFileList")
-    public Object getFolderList() {
+    public Object getFileList() {
         List<File> result = notesFileService.getLatestFileList();
         return Result.getSuccessResult(result);
     }
@@ -32,6 +32,12 @@ public class NotesFileController {
     @RequestMapping("/getNoteInfoById")
     public Object getNoteInfoById(Long id) {
         FileInfoVO infoVO = notesFileService.getNoteInfoById(id);
+        return Result.getSuccessResult(infoVO);
+    }
+
+    @RequestMapping("/getFileContentByFileId")
+    public Object getFileContentByFileId(Long id) {
+        FileInfoVO infoVO = notesFileService.getFileContentByFileId(id);
         return Result.getSuccessResult(infoVO);
     }
 
