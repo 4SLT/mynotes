@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.fslt.dao.NotesContentDao">
+
+    <sql id="allContent">
+        ${table}.id AS id
+        ,${table}.content AS content
+        ,${table}.create_time AS createTime
+        ,${table}.modify_time AS modifyTime
+        ,${table}.delete_flag AS deleteFlag
+        ,${table}.status AS status
+    </sql>
+
+    <select id="getContentList"
+            resultType="com.fslt.entity.pojo.Content">
+        SELECT
+        <include refid="allContent">
+            <property name="table" value="nc"/>
+        </include>
+        FROM
+        t_notes_content nc
+        WHERE
+        nc.delete_flag = 0
+        AND nc.STATUS = 1
+    </select>
+
+
+</mapper>

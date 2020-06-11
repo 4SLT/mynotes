@@ -1,13 +1,6 @@
 import {get, post} from './http';
 import {request} from './http'
 
-// 测试
-export const test = {
-  getHello: body => get('/hello', body),
-  // postList:body=>post('/user/getList', body),
-  requestGetPeople: body => request('/getPeople', body, 'get'),
-  requestSearchTest: body => request('/searchTest', body, 'get'),
-}
 
 // 文件夹
 export const folder = {
@@ -19,4 +12,9 @@ export const folder = {
 export const file = {
   getFolderList: body => request('/notesFile/getFileList', body, 'get'),
   getNoteInfoById: body => request('/notesFile/getNoteInfoById', body, 'get'),
+}
+
+// 笔记内容
+export const content = {
+  getContentList: body => request('/notesContent/getContentList', body, 'get'),
 }

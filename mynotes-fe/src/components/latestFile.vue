@@ -130,14 +130,6 @@
         }
       },
 
-      // searchTest() {
-      //   let searchInput = this.searchInput
-      //   test.requestSearchTest({searchInput}).then(res => {
-      //     console.log(res.re)
-      //     this.tableData = res.re
-      //   })
-      // }
-
     }
 
   }
