@@ -2,6 +2,7 @@ package com.fslt.service.impl;
 
 import com.fslt.dao.NotesFileDao;
 import com.fslt.entity.pojo.File;
+import com.fslt.entity.vo.FileInfoVO;
 import com.fslt.service.NotesFileService;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,11 @@ public class NotesFileServiceImpl implements NotesFileService {
     @Override
     public List<File> getLatestFileList() {
         return notesFileDao.getLatestFileList();
+    }
+
+    @Override
+    public FileInfoVO getNoteInfoById(Long id) {
+        return notesFileDao.getNoteInfoById(id);
     }
 
 }

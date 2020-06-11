@@ -31,9 +31,14 @@ public class File extends BaseInfo {
     private String title;
 
     /**
-     * 内容
+     * 内容id
      */
-    private String content;
+    private Long contentId;
+
+    /**
+     * 作者
+     */
+    private String author;
 
     /**
      * 用户code

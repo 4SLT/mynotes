@@ -1,6 +1,7 @@
 package com.fslt.service;
 
 import com.fslt.entity.pojo.File;
+import com.fslt.entity.vo.FileInfoVO;
 
 import java.util.List;
 
@@ -18,5 +19,13 @@ public interface NotesFileService {
      * @return
      */
     List<File> getLatestFileList();
+
+    /**
+     * 根据note_id获取note基本信息
+     *
+     * @param id
+     * @return
+     */
+    FileInfoVO getNoteInfoById(Long id);
 
 }

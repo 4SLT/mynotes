@@ -6,11 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @description: FileVO
- * @date: 2020/6/10 16:15
+ * @description: FileInfoVO
+ * @date: 2020/6/11 11:09
  * @author: 林宗雄
  * @version: 1.0
  */
 @Data
-public class FileVO extends File {
+@AllArgsConstructor
+@NoArgsConstructor
+public class FileInfoVO extends File {
+
+    /**
+     * 文件夹名
+     */
+    private String folderName;
+
 }

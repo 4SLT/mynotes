@@ -34,19 +34,19 @@
           <el-menu class="border-line-top">
 
             <el-menu-item index="1">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-files"></i>
               <router-link to="/latestFile">最新文档</router-link>
             </el-menu-item>
 
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i class="el-icon-folder"></i>
                 <span>我的文件夹</span>
               </template>
             </el-submenu>
 
             <el-menu-item index="3">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-star-off"></i>
               <router-link to="/starFile">加星文件</router-link>
             </el-menu-item>
 

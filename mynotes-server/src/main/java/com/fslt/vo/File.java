@@ -13,6 +13,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class File {
 
-    private String fileName;
+    private String title;
 
 }

@@ -1,6 +1,8 @@
 package com.fslt.dao;
 
 import com.fslt.entity.pojo.File;
+import com.fslt.entity.vo.FileInfoVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,5 +20,13 @@ public interface NotesFileDao {
      * @return
      */
     List<File> getLatestFileList();
+
+    /**
+     * 根据note_id获取note基本信息
+     *
+     * @param id
+     * @return
+     */
+    FileInfoVO getNoteInfoById(@Param("id") Long id);
 
 }

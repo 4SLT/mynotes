@@ -8,7 +8,8 @@
         ,${table}.folder_id AS folderId
         ,${table}.unique_code AS uniqueCode
         ,${table}.title AS title
-        ,${table}.content AS content
+        ,${table}.content_id AS contentId
+        ,${table}.author AS author
         ,${table}.user_code AS userCode
         ,${table}.user_id AS userId
         ,${table}.create_time AS createTime
@@ -24,12 +25,26 @@
             <property name="table" value="nfi"/>
         </include>
         FROM
-            t_notes_file nfi
+        t_notes_file nfi
         WHERE
-            nfi.delete_flag = 0
-            AND nfi.STATUS = 1
+        nfi.delete_flag = 0
+        AND nfi.STATUS = 1
         ORDER BY
-            nfi.modify_time DESC
+        nfi.modify_time DESC
+    </select>
+
+    <select id="getNoteInfoById"
+            resultType="com.fslt.entity.vo.FileInfoVO">
+        SELECT
+            nfi.author AS author,
+            nfi.create_time AS createTime,
+            nfi.modify_time AS modifyTime,
+            nf.folder_name AS folderName
+        FROM
+            t_notes_file nfi
+            LEFT JOIN t_notes_folder nf ON nfi.folder_id = nf.id
+        WHERE
+            nfi.id = #{id,jdbcType = BIGINT}
     </select>
 
 </mapper>
