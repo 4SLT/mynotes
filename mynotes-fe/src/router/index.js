@@ -7,6 +7,9 @@ import LatestFile from '@/components/latestFile'
 import StarFile from '@/components/starFile'
 import ColourFile from '@/components/colourFile'
 
+import File from '@/components/file'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +45,10 @@ export default new Router({
       path: '/colourFile',
       name: 'colourFile',
       component: ColourFile
+    }, {
+      path: '/file',
+      name: 'file',
+      component: File
     },
     {
       path: '/404',

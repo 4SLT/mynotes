@@ -16,8 +16,13 @@ import lombok.NoArgsConstructor;
 public class Content extends BaseInfo {
 
     /**
-     * 笔记内容
+     * markdown格式内容
      */
-    private String content;
+    private String contentMd;
+
+    /**
+     * html格式内容
+     */
+    private String contentHtml;
 
 }

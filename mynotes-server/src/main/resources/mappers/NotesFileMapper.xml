@@ -53,7 +53,8 @@
             nfi.id AS id,
             nfi.title AS title,
             nfi.content_id AS contentId,
-            nc.content AS content
+            nc.content_md AS contentMd,
+            nc.content_html AS contentHtml
         FROM
             t_notes_file nfi
             LEFT JOIN t_notes_content nc ON nc.id = nfi.content_id
@@ -62,4 +63,18 @@
             AND nfi.STATUS = 1
             AND nfi.id = #{id,jdbcType = BIGINT}
     </select>
+
+    <!--    <insert id=""-->
+    <!--            parameterType="com.fslt.entity.vo.FileInfoVO">-->
+
+    <!--    </insert>-->
+
+    <update id="updateTitleById"
+            parameterType="com.fslt.entity.vo.FileInfoVO">
+        UPDATE t_notes_file
+        SET title = #{title,jdbcType = VARCHAR}
+        WHERE
+            id = #{id,jdbcType = BIGINT}
+    </update>
+
 </mapper>

@@ -3,8 +3,10 @@ package com.fslt.service.impl;
 import com.fslt.dao.NotesFileDao;
 import com.fslt.entity.pojo.File;
 import com.fslt.entity.vo.FileInfoVO;
+import com.fslt.service.NotesContentService;
 import com.fslt.service.NotesFileService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,6 +22,9 @@ public class NotesFileServiceImpl implements NotesFileService {
 
     @Resource
     private NotesFileDao notesFileDao;
+    @Resource
+    private NotesContentService notesContentService;
+
 
     @Override
     public List<File> getLatestFileList() {
@@ -34,6 +39,19 @@ public class NotesFileServiceImpl implements NotesFileService {
     @Override
     public FileInfoVO getFileContentByFileId(Long id) {
         return notesFileDao.getFileContentByFileId(id);
+    }
+
+    @Override
+    public Integer updateTitleById(FileInfoVO vo) {
+        return notesFileDao.updateTitleById(vo);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Integer saveNote(FileInfoVO vo) {
+        Integer result1 = this.updateTitleById(vo);
+        Integer result2 = notesContentService.updateContentById(vo);
+        return result1 * result2;
     }
 
 }

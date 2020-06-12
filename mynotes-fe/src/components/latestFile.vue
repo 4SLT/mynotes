@@ -40,7 +40,8 @@
           <el-row>
             <el-col :span="10">
               <div class="vertical-center text-left" style="padding-left: 20px;">
-                {{this.file.title}}
+                <el-input v-model="file.title" placeholder="请输入标题" style="height: 100%">
+                </el-input>
               </div>
             </el-col>
 
@@ -58,7 +59,14 @@
         </div>
         <!--文件内容-->
         <div class="border-line-top">
-          {{this.file.content}}
+          <mavon-editor
+            v-model="file.contentMd"
+            ref="md"
+            @change="change"
+            @save="saveNote"
+            :subfield="false"
+            :defaultOpen="'preview'">
+          </mavon-editor>
         </div>
       </el-main>
 
@@ -80,11 +88,13 @@
       return {
         searchInput: '',
         id: 1,
+        mdValue: '',
         file: {
           id: 0,
           title: 'file的title',
           contentId: '',
-          content: 'file的content'
+          contentMd: 'file的contentMd',
+          contentHtml: ''
         },
         tableData: [
           {title: 'mock文件', id: 1, contentId: 1}
@@ -109,8 +119,17 @@
         })
       },
 
+      change(value, render) {
+        // render 为 markdown 解析后的结果[html]
+        this.file.contentHtml = render;
+      },
+
       saveNote() {
-        alert("保存笔记")
+        console.log(this.file.contentMd);
+        console.log(this.file.contentHtml);
+        file.saveNote(this.file).then(res => {
+          console.log(res.re)
+        })
       },
 
       getNoteInfoById() {
@@ -126,7 +145,9 @@
           let id = this.tableData[0].contentId
           content.getContentById({id}).then(res => {
             this.file = this.tableData[0]
-            this.file.content = res.re.content
+            this.file.contentMd = res.re.contentMd
+            this.file.contentHtml = res.re.contentHtml
+            this.file.contentId = res.re.id
           })
         }
       }

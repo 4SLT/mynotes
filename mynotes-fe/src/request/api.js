@@ -13,6 +13,8 @@ export const file = {
   getFolderList: body => request('/notesFile/getFileList', body, 'get'),
   getNoteInfoById: body => request('/notesFile/getNoteInfoById', body, 'get'),
   getFileContentByFileId: body => request('/notesFile/getFileContentByFileId', body, 'get'),
+  saveNote: body => request('/notesFile/saveNote', body, 'post'),
+
 }
 
 // 笔记内容

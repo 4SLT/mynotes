@@ -5,7 +5,8 @@
 
     <sql id="allContent">
         ${table}.id AS id
-        ,${table}.content AS content
+        ,${table}.content_md AS contentMd
+        ,${table}.content_html AS contentHtml
         ,${table}.create_time AS createTime
         ,${table}.modify_time AS modifyTime
         ,${table}.delete_flag AS deleteFlag
@@ -38,5 +39,14 @@
         AND nc.STATUS = 1
         AND nc.id = #{id,jdbcType = BIGINT}
     </select>
+
+    <update id="updateContentById"
+            parameterType="com.fslt.entity.vo.FileInfoVO">
+        UPDATE t_notes_content
+        SET content_md = #{contentMd,jdbcType = VARCHAR},
+        content_html = #{contentHtml,jdbcType = VARCHAR}
+        WHERE
+            id = #{contentId,jdbcType = BIGINT}
+    </update>
 
 </mapper>

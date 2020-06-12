@@ -1,6 +1,7 @@
 package com.fslt.dao;
 
 import com.fslt.entity.pojo.Content;
+import com.fslt.entity.vo.FileInfoVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,5 +29,13 @@ public interface NotesContentDao {
      * @return
      */
     Content getContentById(@Param("id") Long id);
+
+    /**
+     * 根据content_id更新笔记内容
+     *
+     * @param vo
+     * @return
+     */
+    Integer updateContentById(FileInfoVO vo);
 
 }

@@ -35,4 +35,20 @@ public interface NotesFileService {
      * @return
      */
     FileInfoVO getFileContentByFileId(Long id);
+
+    /**
+     * 根据id修改笔记标题
+     *
+     * @param vo
+     * @return
+     */
+    Integer updateTitleById(FileInfoVO vo);
+
+    /**
+     * 根据id修改笔记标题内容
+     *
+     * @param vo
+     * @return
+     */
+    Integer saveNote(FileInfoVO vo);
 }

@@ -2,6 +2,7 @@ package com.fslt.service.impl;
 
 import com.fslt.dao.NotesContentDao;
 import com.fslt.entity.pojo.Content;
+import com.fslt.entity.vo.FileInfoVO;
 import com.fslt.service.NotesContentService;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,11 @@ public class NotesContentServiceImpl implements NotesContentService {
     @Override
     public Content getContentById(Long id) {
         return notesContentDao.getContentById(id);
+    }
+
+    @Override
+    public Integer updateContentById(FileInfoVO vo) {
+        return notesContentDao.updateContentById(vo);
     }
 
 }

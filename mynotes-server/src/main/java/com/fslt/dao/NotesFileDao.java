@@ -37,4 +37,12 @@ public interface NotesFileDao {
      */
     FileInfoVO getFileContentByFileId(@Param("id") Long id);
 
+    /**
+     * 根据id修改笔记标题
+     *
+     * @param vo
+     * @return
+     */
+    Integer updateTitleById(FileInfoVO vo);
+
 }
