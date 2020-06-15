@@ -49,4 +49,16 @@
             id = #{contentId,jdbcType = BIGINT}
     </update>
 
+    <insert id="addNewFileContent"
+            parameterType="com.fslt.entity.vo.NewFileVO"
+            useGeneratedKeys="true"
+            keyProperty="contentId">
+        INSERT INTO t_notes_content ( content_md, content_html )
+        VALUES
+            (
+            '',
+            ''
+            )
+    </insert>
+
 </mapper>

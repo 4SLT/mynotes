@@ -2,6 +2,7 @@ package com.fslt.service;
 
 import com.fslt.entity.pojo.File;
 import com.fslt.entity.vo.FileInfoVO;
+import com.fslt.entity.vo.NewFileVO;
 
 import java.util.List;
 
@@ -51,4 +52,20 @@ public interface NotesFileService {
      * @return
      */
     Integer saveNote(FileInfoVO vo);
+
+    /**
+     * 添加新文件（不包括文件内容）
+     *
+     * @param vo
+     * @return
+     */
+    Integer addNewFile(NewFileVO vo);
+
+    /**
+     * 添加新文件（包括文件内容）
+     *
+     * @param vo
+     * @return
+     */
+    Integer addNote(NewFileVO vo);
 }

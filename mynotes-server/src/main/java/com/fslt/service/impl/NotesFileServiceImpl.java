@@ -3,6 +3,7 @@ package com.fslt.service.impl;
 import com.fslt.dao.NotesFileDao;
 import com.fslt.entity.pojo.File;
 import com.fslt.entity.vo.FileInfoVO;
+import com.fslt.entity.vo.NewFileVO;
 import com.fslt.service.NotesContentService;
 import com.fslt.service.NotesFileService;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,19 @@ public class NotesFileServiceImpl implements NotesFileService {
         Integer result1 = this.updateTitleById(vo);
         Integer result2 = notesContentService.updateContentById(vo);
         return result1 * result2;
+    }
+
+    @Override
+    public Integer addNewFile(NewFileVO vo) {
+        return notesFileDao.addNewFile(vo);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Integer addNote(NewFileVO vo) {
+        notesContentService.addNewFileContent(vo);
+        Integer result = this.addNewFile(vo);
+        return result;
     }
 
 }

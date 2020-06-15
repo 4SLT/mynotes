@@ -49,7 +49,7 @@
             <el-col :span="14">
               <div class="vertical-center text-right" style="padding-right: 20px;">
                 <el-button type="primary" size="small" @click="saveNote">保存</el-button>
-                <el-button type="primary" size="small" @click="">测试接口</el-button>
+                <el-button type="primary" size="small" @click="testAdd">测试接口</el-button>
                 <el-button plain size="small" icon="el-icon-star-on"></el-button>
                 <el-button plain size="small" icon="el-icon-delete"></el-button>
                 <el-button plain size="small" icon="el-icon-info" @click="getNoteInfoById"></el-button>
@@ -92,10 +92,11 @@
           title: 'file的title',
           contentId: '',
           contentMd: 'file的contentMd',
-          contentHtml: ''
+          contentHtml: '',
+          folderId: 0
         },
         tableData: [
-          {title: 'mock文件', id: 1, contentId: 1}
+          {title: 'mock文件', id: 1, contentId: 1, folderId: 0}
         ]
       }
     },
@@ -148,6 +149,12 @@
             this.file.contentId = res.re.id
           })
         }
+      },
+
+      testAdd() {
+        file.addNote(this.file).then(res => {
+          console.log(res.re)
+        })
       }
 
     },

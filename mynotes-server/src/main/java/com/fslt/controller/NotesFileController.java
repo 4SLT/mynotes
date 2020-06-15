@@ -3,6 +3,7 @@ package com.fslt.controller;
 import com.fslt.entity.pojo.File;
 import com.fslt.entity.vo.FileInfoVO;
 import com.fslt.entity.vo.FileVO;
+import com.fslt.entity.vo.NewFileVO;
 import com.fslt.result.Result;
 import com.fslt.service.NotesFileService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,12 @@ public class NotesFileController {
     @RequestMapping("/saveNote")
     public Object saveNote(FileInfoVO vo) {
         Integer result = notesFileService.saveNote(vo);
+        return Result.getSuccessResult(result);
+    }
+
+    @RequestMapping("/addNote")
+    public Object addNote(NewFileVO vo) {
+        Integer result = notesFileService.addNote(vo);
         return Result.getSuccessResult(result);
     }
 

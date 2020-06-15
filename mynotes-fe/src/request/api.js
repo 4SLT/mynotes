@@ -14,6 +14,7 @@ export const file = {
   getNoteInfoById: body => request('/notesFile/getNoteInfoById', body, 'get'),
   getFileContentByFileId: body => request('/notesFile/getFileContentByFileId', body, 'get'),
   saveNote: body => request('/notesFile/saveNote', body, 'post'),
+  addNote: body => request('/notesFile/addNote', body, 'post'),
 
 }
 

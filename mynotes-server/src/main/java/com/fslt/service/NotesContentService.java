@@ -2,6 +2,7 @@ package com.fslt.service;
 
 import com.fslt.entity.pojo.Content;
 import com.fslt.entity.vo.FileInfoVO;
+import com.fslt.entity.vo.NewFileVO;
 
 import java.util.List;
 
@@ -35,4 +36,12 @@ public interface NotesContentService {
      * @return
      */
     Integer updateContentById(FileInfoVO vo);
+
+    /**
+     * 新增文件内容
+     *
+     * @param vo
+     * @return
+     */
+    Integer addNewFileContent(NewFileVO vo);
 }
