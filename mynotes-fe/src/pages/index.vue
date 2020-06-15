@@ -39,10 +39,10 @@
             </el-menu-item>
 
             <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-folder"></i>
-                <span>我的文件夹</span>
-              </template>
+                            <template slot="title">
+                              <i class="el-icon-folder"></i>
+                              <span>我的文件夹</span>
+                            </template>
             </el-submenu>
 
             <el-menu-item index="3">
@@ -59,18 +59,18 @@
 
         </el-aside>
 
-<!--        &lt;!&ndash;文件列表&ndash;&gt;-->
-<!--        <el-aside class="next-aside">-->
-<!--          <div style="background-color: white;height: 10%; width: 100%;">搜索</div>-->
+        <!--        &lt;!&ndash;文件列表&ndash;&gt;-->
+        <!--        <el-aside class="next-aside">-->
+        <!--          <div style="background-color: white;height: 10%; width: 100%;">搜索</div>-->
 
-<!--          <router-view></router-view>-->
+        <!--          <router-view></router-view>-->
 
-<!--        </el-aside>-->
+        <!--        </el-aside>-->
 
         <!--文件区-->
         <el-main>
-<!--          <div style="background-color: white;height: 10%; width: 100%;">文件名</div>-->
-<!--          <file></file>-->
+          <!--          <div style="background-color: white;height: 10%; width: 100%;">文件名</div>-->
+          <!--          <file></file>-->
           <router-view></router-view>
 
         </el-main>
@@ -88,7 +88,15 @@
 
 
   export default {
-    name: "Index"
+    name: "Index",
+    data() {
+      return {
+
+      }
+    },
+    methods: {
+
+    }
   }
 </script>
 

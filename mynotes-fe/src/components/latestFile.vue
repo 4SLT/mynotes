@@ -25,7 +25,8 @@
             height="605"
             :data="tableData"
             :show-header=false
-            style="width: 100%;">
+            style="width: 100%;"
+            @row-click="getFileContentById">
             <el-table-column
               prop="title">
             </el-table-column>
@@ -48,10 +49,9 @@
             <el-col :span="14">
               <div class="vertical-center text-right" style="padding-right: 20px;">
                 <el-button type="primary" size="small" @click="saveNote">保存</el-button>
-                <el-button type="primary" size="small" @click="getFileContentById">测试接口</el-button>
+                <el-button type="primary" size="small" @click="">测试接口</el-button>
                 <el-button plain size="small" icon="el-icon-star-on"></el-button>
                 <el-button plain size="small" icon="el-icon-delete"></el-button>
-                <!--                <el-button plain size="small" icon="el-icon-more"></el-button>-->
                 <el-button plain size="small" icon="el-icon-info" @click="getNoteInfoById"></el-button>
               </div>
             </el-col>
@@ -87,8 +87,6 @@
     data() {
       return {
         searchInput: '',
-        id: 1,
-        mdValue: '',
         file: {
           id: 0,
           title: 'file的title',
@@ -111,8 +109,8 @@
       },
 
       //根据文件id查询文件的内容
-      getFileContentById() {
-        let id = 1
+      getFileContentById(row, event, column) {
+        let id = row.id
         file.getFileContentByFileId({id}).then(res => {
           this.file = res.re
           console.log(this.file)
@@ -133,7 +131,7 @@
       },
 
       getNoteInfoById() {
-        let id = this.id
+        let id = this.file.id
         file.getNoteInfoById({id}).then(res => {
           console.log(res.re)
         })
