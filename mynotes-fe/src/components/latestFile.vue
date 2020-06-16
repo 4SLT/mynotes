@@ -152,10 +152,13 @@
       },
 
       testAdd() {
-        file.addNote(this.file).then(res => {
-          console.log(res.re)
-        })
-      }
+        // file.addNote(this.file).then(res => {
+        //   console.log(res.re)
+        // })
+        console.log(this.file.id)
+
+      },
+
 
     },
     created() {

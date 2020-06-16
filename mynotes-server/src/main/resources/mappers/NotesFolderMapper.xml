@@ -26,5 +26,15 @@
 
     </select>
 
+    <insert id="addNewFolder"
+            parameterType="com.fslt.entity.vo.NewFolderVO">
+        INSERT INTO t_notes_folder ( folder_name, parent_id )
+        VALUES
+            (
+            #{folderName,jdbcType = VARCHAR},
+            #{parentId,jdbcType = BIGINT}
+            )
+    </insert>
+
 
 </mapper>

@@ -2,6 +2,7 @@ package com.fslt.service.impl;
 
 import com.fslt.dao.NotesFolderDao;
 import com.fslt.entity.pojo.Folder;
+import com.fslt.entity.vo.NewFolderVO;
 import com.fslt.service.NotesFolderService;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,11 @@ public class NotesFolderServiceImpl implements NotesFolderService {
     @Override
     public List<Folder> getFolderList() {
         return notesFolderDao.getFolderList();
+    }
+
+    @Override
+    public Integer addNewFolder(NewFolderVO vo) {
+        return notesFolderDao.addNewFolder(vo);
     }
 
 }

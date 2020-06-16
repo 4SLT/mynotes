@@ -29,7 +29,14 @@
       <el-container style="height: 90%">
         <!--侧边栏-->
         <el-aside class="aside">
-          <div style="background-color: white;height: 10%; width: 100%;" class="border-line-top">新建</div>
+          <div style="background-color: white;height: 10%; width: 100%;" class="border-line-top">
+            <el-button
+              @click="dialogFormVisible = true"
+              style="width: 100%; height: 100%;"
+              icon="el-icon-plus">
+              新增
+            </el-button>
+          </div>
 
           <el-menu class="border-line-top">
 
@@ -39,10 +46,10 @@
             </el-menu-item>
 
             <el-submenu index="2">
-                            <template slot="title">
-                              <i class="el-icon-folder"></i>
-                              <span>我的文件夹</span>
-                            </template>
+              <template slot="title">
+                <i class="el-icon-folder"></i>
+                <span>我的文件夹</span>
+              </template>
             </el-submenu>
 
             <el-menu-item index="3">
@@ -59,18 +66,9 @@
 
         </el-aside>
 
-        <!--        &lt;!&ndash;文件列表&ndash;&gt;-->
-        <!--        <el-aside class="next-aside">-->
-        <!--          <div style="background-color: white;height: 10%; width: 100%;">搜索</div>-->
-
-        <!--          <router-view></router-view>-->
-
-        <!--        </el-aside>-->
-
         <!--文件区-->
         <el-main>
-          <!--          <div style="background-color: white;height: 10%; width: 100%;">文件名</div>-->
-          <!--          <file></file>-->
+
           <router-view></router-view>
 
         </el-main>
@@ -79,6 +77,23 @@
       </el-container>
     </el-container>
 
+    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="type" :label-width="formLabelWidth">
+          <el-select v-model="form.addType" placeholder="请选择新增文件类型">
+            <el-option label="新建文件夹" value="folder"></el-option>
+            <el-option label="新建笔记" value="file"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="name" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="testAdd">确 定</el-button>
+      </div>
+    </el-dialog>
 
   </div>
 
@@ -86,15 +101,44 @@
 
 <script>
 
+  import {folder} from '@/request/api'
+  import {file} from '@/request/api'
+  import {content} from '@/request/api'
 
   export default {
     name: "Index",
     data() {
       return {
-
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          addType: '',
+          folderId:0
+        },
+        newFile: {
+          title: '',
+          folderId: 0
+        },
+        newFolder:{
+          folderName:'',
+          parentId:0
+        },
+        formLabelWidth: '120px'
       }
     },
     methods: {
+      testAdd() {
+
+        if (this.form.addType === '') {
+          alert('null')
+          this.dialogFormVisible = false
+        } else {
+          file.addNew(this.form).then(res => {
+            console.log(res.re)
+          })
+        }
+        this.dialogFormVisible = false
+      },
 
     }
   }
@@ -173,4 +217,8 @@
     border-top: 1px solid #D3DCE6;
   }
 
+  /*用于垂直居中*/
+  .vertical-center {
+    line-height: 60px;
+  }
 </style>

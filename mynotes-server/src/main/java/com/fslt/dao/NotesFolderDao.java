@@ -1,6 +1,7 @@
 package com.fslt.dao;
 
 import com.fslt.entity.pojo.Folder;
+import com.fslt.entity.vo.NewFolderVO;
 
 import java.util.List;
 
@@ -19,4 +20,11 @@ public interface NotesFolderDao {
      */
     List<Folder> getFolderList();
 
+    /**
+     * 新增文件夹
+     *
+     * @param vo
+     * @return
+     */
+    Integer addNewFolder(NewFolderVO vo);
 }

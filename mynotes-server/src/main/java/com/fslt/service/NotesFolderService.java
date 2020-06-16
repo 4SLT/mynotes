@@ -1,6 +1,7 @@
 package com.fslt.service;
 
 import com.fslt.entity.pojo.Folder;
+import com.fslt.entity.vo.NewFolderVO;
 
 import java.util.List;
 
@@ -18,5 +19,13 @@ public interface NotesFolderService {
      * @return
      */
     List<Folder> getFolderList();
+
+    /**
+     * 新增文件夹
+     *
+     * @param vo
+     * @return
+     */
+    Integer addNewFolder(NewFolderVO vo);
 
 }

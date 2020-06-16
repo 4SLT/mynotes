@@ -1,11 +1,11 @@
 package com.fslt.controller;
 
 import com.fslt.entity.pojo.File;
-import com.fslt.entity.vo.FileInfoVO;
-import com.fslt.entity.vo.FileVO;
-import com.fslt.entity.vo.NewFileVO;
+import com.fslt.entity.vo.*;
+import com.fslt.enums.AddTypeEnum;
 import com.fslt.result.Result;
 import com.fslt.service.NotesFileService;
+import com.fslt.service.NotesFolderService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +24,8 @@ public class NotesFileController {
 
     @Resource
     private NotesFileService notesFileService;
+    @Resource
+    private NotesFolderService notesFolderService;
 
     @RequestMapping("/getFileList")
     public Object getFileList() {
@@ -52,6 +54,25 @@ public class NotesFileController {
     @RequestMapping("/addNote")
     public Object addNote(NewFileVO vo) {
         Integer result = notesFileService.addNote(vo);
+        return Result.getSuccessResult(result);
+    }
+
+    @RequestMapping("/addNew")
+    public Object addNew(NewAddVO vo) {
+        Integer result = new Integer(0);
+
+        if (vo.getAddType().equals(AddTypeEnum.FOLDER.getTypeName())) {
+            NewFolderVO newFolderVO = new NewFolderVO();
+            newFolderVO.setFolderName(vo.getName());
+            newFolderVO.setParentId(vo.getFolderId());
+            result = notesFolderService.addNewFolder(newFolderVO);
+        } else if (vo.getAddType().equals(AddTypeEnum.FILE.getTypeName())) {
+            NewFileVO newFileVO = new NewFileVO();
+            newFileVO.setFolderId(vo.getFolderId());
+            newFileVO.setTitle(vo.getName());
+            result = notesFileService.addNote(newFileVO);
+        }
+
         return Result.getSuccessResult(result);
     }
 
