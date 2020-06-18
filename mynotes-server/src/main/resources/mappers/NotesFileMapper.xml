@@ -16,6 +16,7 @@
         ,${table}.modify_time AS modifyTime
         ,${table}.delete_flag AS deleteFlag
         ,${table}.status AS status
+        ,${table}.star_flag AS starFlag
     </sql>
 
     <select id="getLatestFileList"
@@ -45,23 +46,28 @@
             LEFT JOIN t_notes_folder nf ON nfi.folder_id = nf.id
         WHERE
             nfi.id = #{id,jdbcType = BIGINT}
+            AND nfi.status = 1
+            AND nfi.delete_flag = 0
     </select>
 
     <select id="getFileContentByFileId"
             resultType="com.fslt.entity.vo.FileInfoVO">
         SELECT
             nfi.id AS id,
-            nfi.folder_ID as folderId,
+            nfi.folder_id as folderId,
             nfi.title AS title,
             nfi.content_id AS contentId,
             nc.content_md AS contentMd,
-            nc.content_html AS contentHtml
+            nc.content_html AS contentHtml,
+            nfi.star_flag AS starFlag,
+            nf.folder_name AS folderName
         FROM
             t_notes_file nfi
             LEFT JOIN t_notes_content nc ON nc.id = nfi.content_id
+            LEFT JOIN t_notes_folder nf ON nf.id = nfi.folder_id
         WHERE
             nfi.delete_flag = 0
-            AND nfi.STATUS = 1
+            AND nfi.status = 1
             AND nfi.id = #{id,jdbcType = BIGINT}
     </select>
 
@@ -73,7 +79,8 @@
     <update id="updateTitleById"
             parameterType="com.fslt.entity.vo.FileInfoVO">
         UPDATE t_notes_file
-        SET title = #{title,jdbcType = VARCHAR}
+        SET title = #{title,jdbcType = VARCHAR},
+        modify_time = now()
         WHERE
             id = #{id,jdbcType = BIGINT}
     </update>
@@ -89,5 +96,22 @@
             #{contentId,jdbcType = BIGINT}
             )
     </insert>
+
+    <update id="deleteNote"
+            parameterType="java.lang.Long">
+        UPDATE t_notes_file
+        SET delete_flag = 1,
+        status = 0
+        WHERE
+            id = #{id,jdbcType = BIGINT}
+    </update>
+
+    <update id="updateStarFlagById"
+            parameterType="com.fslt.entity.vo.FileVO">
+        UPDATE t_notes_file
+        SET star_flag = #{starFlag,jdbcType = TINYINT}
+        WHERE
+            id = #{id,jdbcType = BIGINT}
+    </update>
 
 </mapper>

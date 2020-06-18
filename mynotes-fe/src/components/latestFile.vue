@@ -22,6 +22,7 @@
         <!--搜索结果列表-->
         <div class="border-line-top" style="width: 100%;">
           <el-table
+            v-loading="loading"
             height="605"
             :data="tableData"
             :show-header=false
@@ -49,9 +50,9 @@
             <el-col :span="14">
               <div class="vertical-center text-right" style="padding-right: 20px;">
                 <el-button type="primary" size="small" @click="saveNote">保存</el-button>
-                <el-button type="primary" size="small" @click="testAdd">测试接口</el-button>
-                <el-button plain size="small" icon="el-icon-star-on"></el-button>
-                <el-button plain size="small" icon="el-icon-delete"></el-button>
+                <el-button type="primary" size="small" @click="">测试接口</el-button>
+                <el-button plain size="small" :icon="starIcon" @click="starFile"></el-button>
+                <el-button plain size="small" icon="el-icon-delete" @click="deleteNote"></el-button>
                 <el-button plain size="small" icon="el-icon-info" @click="getNoteInfoById"></el-button>
               </div>
             </el-col>
@@ -86,14 +87,17 @@
     name: "latestFile",
     data() {
       return {
+        starIcon: 'el-icon-star-off',
         searchInput: '',
+        loading: false,
         file: {
           id: 0,
           title: 'file的title',
           contentId: '',
           contentMd: 'file的contentMd',
           contentHtml: '',
-          folderId: 0
+          folderId: 0,
+          starFlag: false
         },
         tableData: [
           {title: 'mock文件', id: 1, contentId: 1, folderId: 0}
@@ -101,11 +105,23 @@
       }
     },
     methods: {
-
-      search() {
+      //刚进入页面执行的操作
+      //查询列表+展示第一篇笔记
+      loadPage() {
+        this.loading = true
         file.getFolderList().then(res => {
           this.tableData = res.re
           this.setFirstNoteInfo()
+          this.loading = false
+        })
+      },
+
+      search() {
+        this.loading = true
+        file.getFolderList().then(res => {
+          this.tableData = res.re
+          this.setFirstNoteInfo()
+          this.loading = false
         })
       },
 
@@ -114,7 +130,7 @@
         let id = row.id
         file.getFileContentByFileId({id}).then(res => {
           this.file = res.re
-          console.log(this.file)
+          this.setStarIcon()
         })
       },
 
@@ -124,11 +140,28 @@
       },
 
       saveNote() {
-        console.log(this.file.contentMd);
-        console.log(this.file.contentHtml);
         file.saveNote(this.file).then(res => {
           console.log(res.re)
+          this.setNotify(res.status, res.msg)
+          this.loadPage()
         })
+      },
+
+      // 提示框通知操作结果
+      setNotify(status, msg) {
+        if (status === 0) {
+          this.$notify({
+            title: msg,
+            // message: '这是一条成功的提示消息',
+            type: 'success'
+          })
+        } else {
+          this.$notify.error({
+            title: msg,
+            // message: '这是一条错误的提示消息'
+          })
+        }
+
       },
 
       getNoteInfoById() {
@@ -141,31 +174,58 @@
       //将文件的标题内容设为查询到的文件列表的第一个文件
       setFirstNoteInfo() {
         if (this.tableData.length > 0) {
-          let id = this.tableData[0].contentId
-          content.getContentById({id}).then(res => {
-            this.file = this.tableData[0]
-            this.file.contentMd = res.re.contentMd
-            this.file.contentHtml = res.re.contentHtml
-            this.file.contentId = res.re.id
+          let id = this.tableData[0].id
+          file.getFileContentByFileId({id}).then(res => {
+            this.file = res.re
+            console.log(this.file)
+            this.setStarIcon()
           })
         }
       },
 
-      testAdd() {
-        // file.addNote(this.file).then(res => {
-        //   console.log(res.re)
-        // })
-        console.log(this.file.id)
-
+      starFile() {
+        if (this.starIcon === "el-icon-star-on") {
+          this.starIcon = "el-icon-star-off"
+          this.file.starFlag = false
+        } else {
+          this.starIcon = "el-icon-star-on"
+          this.file.starFlag = true
+        }
+        this.updateStarFlag()
       },
+
+      setStarIcon() {
+        if (this.file.starFlag === false) {
+          this.starIcon = "el-icon-star-off"
+        } else {
+          this.starIcon = "el-icon-star-on"
+        }
+      },
+
+      deleteNote() {
+        let id = this.file.id
+        file.deleteNoteById({id}).then(res => {
+          console.log(res.re)
+          this.loadPage()
+        })
+      },
+
+      updateStarFlag() {
+        file.updateStarFlag(this.file).then(res => {
+          this.loadPage()
+        })
+      }
 
 
     },
     created() {
-      file.getFolderList().then(res => {
-        this.tableData = res.re
-        this.setFirstNoteInfo()
-      })
+      // file.getFolderList().then(res => {
+      //   this.tableData = res.re
+      //   this.setFirstNoteInfo()
+      // })
+    },
+    mounted() {
+      this.loadPage()
     }
 
   }

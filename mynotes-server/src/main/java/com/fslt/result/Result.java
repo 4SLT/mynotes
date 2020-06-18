@@ -95,6 +95,19 @@ public class Result<T> implements Serializable, IResult<T> {
     }
 
     /**
+     * 得到正常结果.
+     *
+     * @param re 正常结果
+     */
+    public static <T> Result<T> getSuccessResult(T re, String msg) {
+        Result<T> result = new Result<T>();
+        result.setStatus(SUCCESS_STATUS);
+        result.setRe(re);
+        result.setMsg(msg);
+        return result;
+    }
+
+    /**
      * 得到业务异常Result.
      *
      * @param msg   用于设置Result.msg字段

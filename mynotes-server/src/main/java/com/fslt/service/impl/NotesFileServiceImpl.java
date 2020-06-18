@@ -3,6 +3,7 @@ package com.fslt.service.impl;
 import com.fslt.dao.NotesFileDao;
 import com.fslt.entity.pojo.File;
 import com.fslt.entity.vo.FileInfoVO;
+import com.fslt.entity.vo.FileVO;
 import com.fslt.entity.vo.NewFileVO;
 import com.fslt.service.NotesContentService;
 import com.fslt.service.NotesFileService;
@@ -66,6 +67,16 @@ public class NotesFileServiceImpl implements NotesFileService {
         notesContentService.addNewFileContent(vo);
         Integer result = this.addNewFile(vo);
         return result;
+    }
+
+    @Override
+    public Integer deleteNote(Long id) {
+        return notesFileDao.deleteNote(id);
+    }
+
+    @Override
+    public Integer updateStarFlagById(FileVO vo) {
+        return notesFileDao.updateStarFlagById(vo);
     }
 
 }

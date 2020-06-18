@@ -48,7 +48,7 @@ public class NotesFileController {
     @RequestMapping("/saveNote")
     public Object saveNote(FileInfoVO vo) {
         Integer result = notesFileService.saveNote(vo);
-        return Result.getSuccessResult(result);
+        return Result.getSuccessResult(result, "保存成功");
     }
 
     @RequestMapping("/addNote")
@@ -60,7 +60,6 @@ public class NotesFileController {
     @RequestMapping("/addNew")
     public Object addNew(NewAddVO vo) {
         Integer result = new Integer(0);
-
         if (vo.getAddType().equals(AddTypeEnum.FOLDER.getTypeName())) {
             NewFolderVO newFolderVO = new NewFolderVO();
             newFolderVO.setFolderName(vo.getName());
@@ -72,7 +71,18 @@ public class NotesFileController {
             newFileVO.setTitle(vo.getName());
             result = notesFileService.addNote(newFileVO);
         }
+        return Result.getSuccessResult(result);
+    }
 
+    @RequestMapping("/deleteNoteById")
+    public Object deleteNoteById(Long id) {
+        Integer result = notesFileService.deleteNote(id);
+        return Result.getSuccessResult(result);
+    }
+
+    @RequestMapping("/updateStarFlag")
+    public Object updateStarFlagById(FileVO vo) {
+        Integer result = notesFileService.updateStarFlagById(vo);
         return Result.getSuccessResult(result);
     }
 

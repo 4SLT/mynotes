@@ -2,6 +2,7 @@ package com.fslt.dao;
 
 import com.fslt.entity.pojo.File;
 import com.fslt.entity.vo.FileInfoVO;
+import com.fslt.entity.vo.FileVO;
 import com.fslt.entity.vo.NewFileVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,4 +54,21 @@ public interface NotesFileDao {
      * @return
      */
     Integer addNewFile(NewFileVO vo);
+
+    /**
+     * 根据id删除笔记
+     *
+     * @param id
+     * @return
+     */
+    Integer deleteNote(Long id);
+
+    /**
+     * 根据id修改starFlag
+     *
+     * @param vo
+     * @return
+     */
+    Integer updateStarFlagById(FileVO vo);
+
 }

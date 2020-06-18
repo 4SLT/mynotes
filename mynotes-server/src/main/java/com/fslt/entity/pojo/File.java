@@ -49,4 +49,10 @@ public class File extends BaseInfo {
      * 用户id
      */
     private Long userId;
+
+    /**
+     * 星标/收藏标识（0否；1是）
+     */
+    private Boolean starFlag;
+
 }

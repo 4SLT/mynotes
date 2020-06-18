@@ -42,6 +42,7 @@ public class BaseInfo {
      * 是否已删除(0否；1是)
      */
     private boolean deleteFlag;
+
     /**
      * 状态(0无效;1有效)
      */

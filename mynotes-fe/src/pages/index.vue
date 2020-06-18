@@ -69,7 +69,8 @@
         <!--文件区-->
         <el-main>
 
-          <router-view></router-view>
+          <router-view :key="activeDate"></router-view>
+<!--          <router-view></router-view>-->
 
         </el-main>
 
@@ -115,25 +116,18 @@
           addType: '',
           folderId:0
         },
-        newFile: {
-          title: '',
-          folderId: 0
-        },
-        newFolder:{
-          folderName:'',
-          parentId:0
-        },
-        formLabelWidth: '120px'
+        formLabelWidth: '120px',
+        activeDate: 1
       }
     },
     methods: {
       testAdd() {
 
         if (this.form.addType === '') {
-          alert('null')
           this.dialogFormVisible = false
         } else {
           file.addNew(this.form).then(res => {
+            this.activeDate = new Date().getTime()
             console.log(res.re)
           })
         }
