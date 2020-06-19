@@ -86,4 +86,10 @@ public class NotesFileController {
         return Result.getSuccessResult(result);
     }
 
+    @RequestMapping("/updateAuthorById")
+    public Object updateAuthorById(FileInfoVO vo) {
+        Integer result = notesFileService.updateAuthorById(vo);
+        return Result.getSuccessResult(result);
+    }
+
 }

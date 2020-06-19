@@ -18,6 +18,7 @@ export const file = {
   addNew: body => request('/notesFile/addNew', body, 'post'),
   deleteNoteById: body => request('/notesFile/deleteNoteById', body, 'get'),
   updateStarFlag: body => request('/notesFile/updateStarFlag', body, 'post'),
+  updateAuthorById: body => request('/notesFile/updateAuthorById', body, 'post'),
 
 }
 

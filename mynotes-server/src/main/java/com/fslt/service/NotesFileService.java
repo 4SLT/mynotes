@@ -86,4 +86,11 @@ public interface NotesFileService {
      */
     Integer updateStarFlagById(FileVO vo);
 
+    /**
+     * 根据id修改作者
+     *
+     * @param vo
+     * @return
+     */
+    Integer updateAuthorById(FileInfoVO vo);
 }

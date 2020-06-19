@@ -70,7 +70,7 @@
         <el-main>
 
           <router-view :key="activeDate"></router-view>
-<!--          <router-view></router-view>-->
+          <!--          <router-view></router-view>-->
 
         </el-main>
 
@@ -114,7 +114,7 @@
         form: {
           name: '',
           addType: '',
-          folderId:0
+          folderId: 0
         },
         formLabelWidth: '120px',
         activeDate: 1

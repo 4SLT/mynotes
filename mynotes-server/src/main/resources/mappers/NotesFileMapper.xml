@@ -37,6 +37,7 @@
     <select id="getNoteInfoById"
             resultType="com.fslt.entity.vo.FileInfoVO">
         SELECT
+            nfi.id AS id,
             nfi.author AS author,
             nfi.create_time AS createTime,
             nfi.modify_time AS modifyTime,
@@ -110,6 +111,14 @@
             parameterType="com.fslt.entity.vo.FileVO">
         UPDATE t_notes_file
         SET star_flag = #{starFlag,jdbcType = TINYINT}
+        WHERE
+            id = #{id,jdbcType = BIGINT}
+    </update>
+
+    <update id="updateAuthorById"
+            parameterType="com.fslt.entity.vo.FileInfoVO">
+        UPDATE t_notes_file
+        SET author = #{author,jdbcType = VARCHAR}
         WHERE
             id = #{id,jdbcType = BIGINT}
     </update>

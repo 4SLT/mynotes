@@ -50,10 +50,59 @@
             <el-col :span="14">
               <div class="vertical-center text-right" style="padding-right: 20px;">
                 <el-button type="primary" size="small" @click="saveNote">保存</el-button>
-                <el-button type="primary" size="small" @click="">测试接口</el-button>
+                <!--                <el-button type="primary" size="small" @click="">测试接口</el-button>-->
                 <el-button plain size="small" :icon="starIcon" @click="starFile"></el-button>
-                <el-button plain size="small" icon="el-icon-delete" @click="deleteNote"></el-button>
-                <el-button plain size="small" icon="el-icon-info" @click="getNoteInfoById"></el-button>
+                <!--删除按钮-->
+                <el-popconfirm
+                  title="确定删除笔记吗？"
+                  @onConfirm="deleteNote"
+                >
+                  <el-button plain size="small" icon="el-icon-delete" slot="reference"></el-button>
+                </el-popconfirm>
+                <!--查看note信息按钮-->
+                <el-popover
+                  placement="bottom"
+                  width="400"
+                  trigger="click">
+                  <el-row>
+                    <el-col :span="6">
+                      <p style="text-align: right;">作者：</p>
+                    </el-col>
+                    <el-col :span="18">
+                      <el-input v-model="fileInfo.author" placeholder="请输入作者" @change="updateAuthor"></el-input>
+                    </el-col>
+                  </el-row>
+                  <el-row>
+                    <el-col :span="6">
+                      <p style="text-align: right;">文件夹：</p>
+                    </el-col>
+                    <el-col :span="18">
+                      <el-input v-model="fileInfo.folderName" :disabled="true"></el-input>
+                    </el-col>
+                  </el-row>
+                  <el-row>
+                    <el-col :span="6">
+                      <p style="text-align: right;">创建时间：</p>
+                    </el-col>
+                    <el-col :span="18">
+                      <el-input v-model="fileInfo.createTime" :disabled="true"></el-input>
+                    </el-col>
+                  </el-row>
+                  <el-row>
+                    <el-col :span="6">
+                      <p style="text-align: right;">修改时间：</p>
+                    </el-col>
+                    <el-col :span="18">
+                      <el-input v-model="fileInfo.modifyTime" :disabled="true"></el-input>
+                    </el-col>
+                  </el-row>
+                  <el-button
+                    plain size="small"
+                    icon="el-icon-info"
+                    @click="getNoteInfoById"
+                    slot="reference"></el-button>
+                </el-popover>
+
               </div>
             </el-col>
           </el-row>
@@ -101,7 +150,14 @@
         },
         tableData: [
           {title: 'mock文件', id: 1, contentId: 1, folderId: 0}
-        ]
+        ],
+        fileInfo: {
+          id: 0,
+          author: "",
+          createTime: '',
+          modifyTime: '',
+          folderName: ''
+        }
       }
     },
     methods: {
@@ -167,6 +223,7 @@
       getNoteInfoById() {
         let id = this.file.id
         file.getNoteInfoById({id}).then(res => {
+          this.fileInfo = res.re
           console.log(res.re)
         })
       },
@@ -212,6 +269,12 @@
 
       updateStarFlag() {
         file.updateStarFlag(this.file).then(res => {
+          this.loadPage()
+        })
+      },
+
+      updateAuthor(){
+        file.updateAuthorById(this.fileInfo).then(res => {
           this.loadPage()
         })
       }

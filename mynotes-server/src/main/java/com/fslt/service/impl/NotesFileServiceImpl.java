@@ -79,4 +79,9 @@ public class NotesFileServiceImpl implements NotesFileService {
         return notesFileDao.updateStarFlagById(vo);
     }
 
+    @Override
+    public Integer updateAuthorById(FileInfoVO vo) {
+        return notesFileDao.updateAuthorById(vo);
+    }
+
 }
